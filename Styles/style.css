@@ -1,0 +1,157 @@
+/*----------------CSS RESET--------------------- */
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+/* Make images easier to work with */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ------------------Main Styling Starts------------------- */
+body {
+  background-color: rgb(203, 205, 206);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  display: grid;
+  place-items: center;
+  margin-top: 7rem;
+}
+
+.title {
+  position: relative;
+  font-size: 4rem;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(
+    90deg,
+    rgb(69, 31, 183) 0%,
+    hsla(269, 97%, 37%, 1) 33%,
+    hsla(320, 77%, 55%, 1) 66%,
+    hsla(316, 41%, 93%, 1) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 500%;
+  animation: text 5s ease-in-out infinite forwards;
+}
+
+@keyframes text {
+  0% {
+    background-size: 200%;
+  }
+  25% {
+    background-color: 100%;
+  }
+  50% {
+    background-size: 0%;
+  }
+  75% {
+    background-size: 100%;
+  }
+  100% {
+    background-size: 200%;
+  }
+}
+
+.title::before,
+.title::after {
+  content: "";
+  position: absolute;
+}
+
+.title::before {
+  width: 100vw;
+  left: 50%;
+  background-color: black;
+  transform: translateX(-50%);
+  z-index: -2;
+  height: 100%;
+  top: 0;
+}
+.title::after {
+  background-color: rgb(203, 205, 206);
+  z-index: -1;
+  height: 100%;
+  left: -10px;
+  right: -10px;
+}
+
+main {
+  background-color: black;
+  box-shadow: 2px 2px 5px 5px black;
+  max-width: 500px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+  gap: 2rem;
+}
+
+.timer-main-part {
+  color: white;
+  font-size: 5rem;
+}
+
+.millisecond {
+  font-size: 2rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.function-button {
+  cursor: pointer;
+  background-color: black;
+  border: none;
+  border-radius: 100vw;
+  width: 30%;
+}
+
+.function-button:hover,
+.function-button:focus {
+  scale: 1.1;
+}
+
+.pause-image {
+  outline: 5px solid rgba(128, 128, 128, 0.682);
+  outline-offset: -5px;
+  border-radius: 50%;
+}
+@media (max-width: 40.5em) {
+  .timer-main-part {
+    font-size: 2rem;
+  }
+  .millisecond {
+    font-size: 1rem;
+  }
+  .function-button {
+    width: 20%;
+  }
+  .buttons {
+    justify-content: space-around;
+  }
+}
