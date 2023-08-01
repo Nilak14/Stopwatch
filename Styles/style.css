@@ -21,22 +21,20 @@ img {
 
 /* ------------------Main Styling Starts------------------- */
 body {
-  background-color: rgb(203, 205, 206);
+  background-color: black;
 }
 
 .container {
+  margin-top: 1rem;
+  width: min(90%, 600px);
+  margin-inline: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 3rem;
-  display: grid;
-  place-items: center;
-  margin-top: 7rem;
+  justify-content: center;
 }
 
 .title {
-  position: relative;
   font-size: 4rem;
   font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(
@@ -71,39 +69,14 @@ body {
   }
 }
 
-.title::before,
-.title::after {
-  content: "";
-  position: absolute;
-}
-
-.title::before {
-  width: 100vw;
-  left: 50%;
-  background-color: black;
-  transform: translateX(-50%);
-  z-index: -2;
-  height: 100%;
-  top: 0;
-}
-.title::after {
-  background-color: rgb(203, 205, 206);
-  z-index: -1;
-  height: 100%;
-  left: -10px;
-  right: -10px;
-}
-
 main {
-  background-color: black;
-  box-shadow: 2px 2px 5px 5px black;
-  max-width: 500px;
-  margin-inline: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2em;
+  padding-inline: 2em;
+  padding-top: 2em;
+  margin-bottom: 1rem;
   gap: 2rem;
 }
 
@@ -116,19 +89,12 @@ main {
   font-size: 2rem;
 }
 
-.buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .function-button {
   cursor: pointer;
   background-color: black;
   border: none;
-  border-radius: 100vw;
-  width: 30%;
+  width: 6rem;
+  margin-inline: 1.5rem;
 }
 
 .function-button:hover,
@@ -141,17 +107,98 @@ main {
   outline-offset: -5px;
   border-radius: 50%;
 }
+
+.none {
+  display: none;
+}
+
+.laps {
+  width: 100%;
+}
+.laps-list-container {
+  max-height: 40vh;
+  min-height: 100%;
+  overflow-y: auto;
+}
+
+.border {
+  border: 2px solid rgb(109, 98, 98);
+}
+
+.laps-list-container::-webkit-scrollbar {
+  width: 0.5em;
+}
+.laps-list-container::-webkit-scrollbar-track {
+  background-color: black;
+}
+.laps-list-container::-webkit-scrollbar-thumb {
+  background-color: rgb(109, 98, 98);
+  border-radius: 20px;
+}
+
+.lap-list {
+  color: rgba(85, 82, 82, 0.999);
+  font-size: 3rem;
+  border-block: 2px solid rgba(85, 82, 82, 0.999);
+  padding-inline: 2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.milliseconds {
+  font-size: 2rem;
+}
+
 @media (max-width: 40.5em) {
+  .timer-main-part {
+    font-size: 3rem;
+  }
+  .millisecond {
+    font-size: 1rem;
+  }
+  .buttons {
+    display: flex;
+    justify-content: center;
+  }
+  .function-button {
+    width: 20%;
+    margin-inline: 1rem;
+  }
+  .milliseconds {
+    font-size: 1rem;
+  }
+  .lap-list {
+    font-size: 2rem;
+  }
+  .none {
+    display: inline-block;
+    visibility: hidden;
+  }
+  .laps {
+    max-height: 50vh;
+  }
+}
+
+@media (max-width: 22.5em) {
+  .title {
+    font-size: 3rem;
+  }
   .timer-main-part {
     font-size: 2rem;
   }
   .millisecond {
     font-size: 1rem;
   }
+
   .function-button {
     width: 20%;
+    margin-inline: 0.5rem;
   }
-  .buttons {
-    justify-content: space-around;
+  .milliseconds {
+    font-size: 1rem;
+  }
+  .lap-list {
+    font-size: 1.5rem;
   }
 }

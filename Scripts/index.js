@@ -1,7 +1,7 @@
 // Variables for  buttons
-
 const startButtonElement = document.querySelector('.start');
 const resetButtonElement = document.querySelector('.reset-timer');
+const lapButtonElement = document.querySelector('.lap-button');
 
 // Variables for  Timer Elements
 let secondsHTMLElement = document.querySelector('.secs');
@@ -98,9 +98,11 @@ function timerLogic() {
         class = "pause-image function-image"</img>`
         startButtonElement.innerHTML = buttonImageChangeHTML;
         isTimerOn = true;
+        lapButtonElement.classList.remove('none')
+
     }
     else {
-        clearInterval(intervalID);
+        clearInterval(intervalID); ``
         buttonImageChangeHTML = `<img src="images/start.png" alt="Start" class="start-image function-image" title="Start"</img>`
         startButtonElement.innerHTML = buttonImageChangeHTML;
         isTimerOn = false;
@@ -126,6 +128,7 @@ function clearTimer() {
     hoursTimer();
     buttonImageChangeHTML = `<img src="images/start.png" alt="Start" class="start-image function-image" title="Start"</img>`
     startButtonElement.innerHTML = buttonImageChangeHTML;
+    lapButtonElement.classList.add('none')
     isTimerOn = false;
 }
 
@@ -140,4 +143,52 @@ function startTimerFromKeyboard(event) {
     else if (event.key === 'Backspace') {
         clearTimer();
     }
+}
+
+const lapElement = document.querySelector('.laps-list-container');
+
+lapButtonElement.addEventListener('click', () => {
+    lapSet();
+    lapElement.classList.add('border')
+    lapElement.scrollBy(0, 59);
+})
+
+
+
+let time = [];
+let html;
+
+function lapSet() {
+    let h = hours < 10 ? `0${hours}` : hours;
+    let m = minute < 10 ? `0${minute}` : minute;
+    let s = second < 10 ? `0${second}` : second;
+    let ms = millisecond < 10 ? `0${millisecond}` : millisecond;
+    time.push({
+        hourTime: h,
+        minTime: m,
+        secTime: s,
+        milliSecondTime: ms
+    })
+
+    time.forEach((value) => {
+        let numberCounter = time.length
+        let n = numberCounter < 10 ? `0${numberCounter}` : numberCounter;
+        html = `<p class="lap-list">
+        <span class="number">${n}.</span>
+        <class = "time">${value.hourTime} : ${value.minTime} : ${value.secTime} <span class = "milliseconds">${value.milliSecondTime}</span></span>
+        </p>`
+    })
+    lapElement.innerHTML += html;
+}
+
+
+resetButtonElement.addEventListener('click', () => {
+    clearLap();
+    lapElement.classList.remove('border')
+
+})
+
+function clearLap() {
+    lapElement.innerHTML = "";
+    time = []
 }
