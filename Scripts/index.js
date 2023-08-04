@@ -137,6 +137,7 @@ document.body.addEventListener('keydown', (event) => {
     startTimerFromKeyboard(event)
 })
 
+
 function startTimerFromKeyboard(event) {
     if (event.key === 'Enter') {
         timerLogic()
@@ -144,6 +145,7 @@ function startTimerFromKeyboard(event) {
     else if (event.key === 'Backspace') {
         clearTimer();
     }
+
 }
 
 const lapNumberElement = document.querySelector('.num');
@@ -196,11 +198,9 @@ function lapSet() {
     })
     lapOverAllTimeElement.innerHTML += htmlOverAllTime;
     lapNumberElement.innerHTML += htmlNumber;
-}
 
-lapButtonElement.addEventListener('click', () => {
     lap();
-})
+}
 
 let lapTime = [];
 let lapHour;
