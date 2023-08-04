@@ -2,6 +2,7 @@
 const startButtonElement = document.querySelector('.start');
 const resetButtonElement = document.querySelector('.reset-timer');
 const lapButtonElement = document.querySelector('.lap-button');
+const timerPart = document.querySelector('.timer-main-part');
 
 // Variables for  Timer Elements
 let secondsHTMLElement = document.querySelector('.secs');
@@ -145,50 +146,155 @@ function startTimerFromKeyboard(event) {
     }
 }
 
-const lapElement = document.querySelector('.laps-list-container');
+const lapNumberElement = document.querySelector('.num');
+const lapTimeElement = document.querySelector('.lap');
+const lapOverAllTimeElement = document.querySelector('.overall');
+const headingNum = document.querySelector('.h-num');
+const headingLap = document.querySelector('.h-lap');
+const headingOverall = document.querySelector('.h-overall');
+const lapDiv = document.querySelector('.laps')
+
 
 lapButtonElement.addEventListener('click', () => {
+    timerPart.classList.remove('effect')
     lapSet();
-    lapElement.classList.add('border')
-    lapElement.scrollBy(0, 59);
+    lapDiv.scrollBy(0, 100);
 })
 
 
-
-let time = [];
-let html;
+let OverAllTime = []
+let htmlNumber;
+let htmlLapTime;
+let htmlOverAllTime;
 
 function lapSet() {
+    headingNum.innerHTML = 'Lap'
+    headingOverall.innerHTML = "OverAll Time"
+    headingLap.innerHTML = 'Lap Times'
+
     let h = hours < 10 ? `0${hours}` : hours;
     let m = minute < 10 ? `0${minute}` : minute;
     let s = second < 10 ? `0${second}` : second;
     let ms = millisecond < 10 ? `0${millisecond}` : millisecond;
-    time.push({
+    OverAllTime.push({
         hourTime: h,
         minTime: m,
         secTime: s,
         milliSecondTime: ms
-    })
+    });
 
-    time.forEach((value) => {
-        let numberCounter = time.length
+    OverAllTime.forEach((value) => {
+        let numberCounter = OverAllTime.length
         let n = numberCounter < 10 ? `0${numberCounter}` : numberCounter;
-        html = `<p class="lap-list">
-        <span class="number">${n}.</span>
-        <class = "time">${value.hourTime} : ${value.minTime} : ${value.secTime} <span class = "milliseconds">${value.milliSecondTime}</span></span>
-        </p>`
+        htmlNumber = `<p class="number lap">${n}</p>`;
+        htmlOverAllTime = `<p class="lap">
+                            ${value.hourTime}:${value.minTime}:${value.secTime}
+                        <span class="lapMilliSecond">
+                            ${value.milliSecondTime}
+                        </span>
+                    </p>`
     })
-    lapElement.innerHTML += html;
+    lapOverAllTimeElement.innerHTML += htmlOverAllTime;
+    lapNumberElement.innerHTML += htmlNumber;
 }
 
+lapButtonElement.addEventListener('click', () => {
+    lap();
+})
+
+let lapTime = [];
+let lapHour;
+let lapMinute;
+let lapSecond;
+let lapMilliSecond;
+let finalHour;
+let finalMin;
+let finalSec;
+let finalMilliSecond;
+function lap() {
+    let h = hours < 10 ? `0${hours}` : hours;
+    let m = minute < 10 ? `0${minute}` : minute;
+    let s = second < 10 ? `0${second}` : second;
+    let ms = millisecond < 10 ? `0${millisecond}` : millisecond;
+    lapTime.push({
+        hourTime: h,
+        minTime: m,
+        secTime: s,
+        milliSecondTime: ms
+    });
+
+    if (lapTime[1] === undefined) {
+        lapMilliSecond = lapTime[0].milliSecondTime;
+        lapSecond = lapTime[0].secTime
+        lapMinute = lapTime[0].minTime;
+        lapHour = lapTime[0].hourTime;
+        htmlLapTime = `<p class="lap">
+                        ${lapHour} : ${lapMinute} : ${lapSecond}
+                    <span class="lapMilliSecond">
+                        ${lapMilliSecond}
+                    </span>
+                </p>`
+        lapTimeElement.innerHTML += htmlLapTime;
+    }
+    else {
+        for (let i = 1; i < lapTime.length; i++) {
+            if (lapTime[i].milliSecondTime < lapTime[i - 1].milliSecondTime) {
+                finalSec = lapTime[i].secTime - 1;
+                let newMillisecond = parseInt(lapTime[i].milliSecondTime) + 100;
+                lapMilliSecond = newMillisecond - lapTime[i - 1].milliSecondTime;
+            }
+            else {
+                finalSec = lapTime[i].secTime
+                lapMilliSecond = lapTime[i].milliSecondTime - lapTime[i - 1].milliSecondTime;
+            }
+            if (finalSec < lapTime[i - 1].secTime) {
+                finalMin = lapTime[i].minTime - 1;
+                let newSecond = parseInt(finalSec) + 60;
+                lapSecond = newSecond - lapTime[i - 1].secTime;
+            }
+            else {
+                finalMin = lapTime[i].minTime
+                lapSecond = finalSec - lapTime[i - 1].secTime
+            }
+            if (finalMin < lapTime[i - 1].minTime) {
+                finalHour = lapTime[i].hourTime - 1;
+                let newMinute = parseInt(finalMin) + 60;
+                lapMinute = newMinute - lapTime[i - 1].minTime;
+            }
+            else {
+                finalHour = lapTime[i].hourTime
+                lapMinute = finalMin - lapTime[i - 1].minTime
+            }
+            lapHour = finalHour - lapTime[i - 1].hourTime;
+
+        }
+        let fh = lapHour < 10 ? `0${lapHour}` : lapHour;
+        let fm = lapMinute < 10 ? `0${lapMinute}` : lapMinute;
+        let fs = lapSecond < 10 ? `0${lapSecond}` : lapSecond;
+        let fms = lapMilliSecond < 10 ? `0${lapMilliSecond}` : lapMilliSecond;
+        htmlLapTime = `<p class="lap">
+                        ${fh} : ${fm} : ${fs}
+                    <span class="lapMilliSecond">
+                        ${fms}
+                    </span>
+                </p>`
+        lapTimeElement.innerHTML += htmlLapTime;
+    }
+}
 
 resetButtonElement.addEventListener('click', () => {
     clearLap();
-    lapElement.classList.remove('border')
+    timerPart.classList.add('effect')
 
 })
 
 function clearLap() {
-    lapElement.innerHTML = "";
-    time = []
+    lapTimeElement.innerHTML = "";
+    lapOverAllTimeElement.innerHTML = "";
+    lapNumberElement.innerHTML = "";
+    headingNum.innerHTML = "";
+    headingOverall.innerHTML = "";
+    headingLap.innerHTML = "";
+    OverAllTime = [];
+    lapTime = [];
 }

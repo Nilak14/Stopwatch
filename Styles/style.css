@@ -20,20 +20,20 @@ img {
 }
 
 /* ------------------Main Styling Starts------------------- */
+
 body {
   background-color: black;
 }
 
 .container {
-  margin-top: 1rem;
   width: min(90%, 600px);
   margin-inline: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 2.5rem;
 }
-
 .title {
   font-size: 4rem;
   font-family: Arial, Helvetica, sans-serif;
@@ -49,6 +49,7 @@ body {
   -webkit-text-fill-color: transparent;
   background-size: 500%;
   animation: text 5s ease-in-out infinite forwards;
+  margin-top: 1.5rem;
 }
 
 @keyframes text {
@@ -69,37 +70,53 @@ body {
   }
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-inline: 2em;
-  padding-top: 2em;
-  margin-bottom: 1rem;
-  gap: 2rem;
-}
-
 .timer-main-part {
+  font-size: 3rem;
   color: white;
-  font-size: 5rem;
 }
 
 .millisecond {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
-.function-button {
-  cursor: pointer;
-  background-color: black;
-  border: none;
-  width: 6rem;
-  margin-inline: 1.5rem;
+.laps {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 60px repeat(2, 1fr);
+  gap: 0.5rem;
+  font-size: 1.3rem;
+  color: white;
+  max-height: 37vh;
+  place-items: center;
+  overflow-y: auto;
 }
 
-.function-button:hover,
-.function-button:focus {
-  scale: 1.1;
+.laps::-webkit-scrollbar {
+  width: 5px;
+}
+.laps::-webkit-scrollbar-thumb {
+  background-color: rgb(82, 78, 78);
+}
+.laps::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.heading {
+  margin-bottom: 1.5rem;
+  color: pink;
+}
+.lapMilliSecond {
+  font-size: 1rem;
+}
+.lap {
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 9vh;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .pause-image {
@@ -108,97 +125,60 @@ main {
   border-radius: 50%;
 }
 
+.function-button {
+  width: 20%;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+}
+
+.function-button:hover,
+.function-button:focus {
+  scale: 1.1;
+}
+
 .none {
   display: none;
 }
 
-.laps {
-  width: 100%;
-}
-.laps-list-container {
-  max-height: 40vh;
-  min-height: 100%;
-  overflow-y: auto;
+.effect {
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(-50%);
 }
 
-.border {
-  border: 2px solid rgb(109, 98, 98);
-}
-
-.laps-list-container::-webkit-scrollbar {
-  width: 0.5em;
-}
-.laps-list-container::-webkit-scrollbar-track {
-  background-color: black;
-}
-.laps-list-container::-webkit-scrollbar-thumb {
-  background-color: rgb(109, 98, 98);
-  border-radius: 20px;
-}
-
-.lap-list {
-  color: rgba(85, 82, 82, 0.999);
-  font-size: 3rem;
-  border-block: 2px solid rgba(85, 82, 82, 0.999);
-  padding-inline: 2rem;
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.milliseconds {
-  font-size: 2rem;
-}
-
-@media (max-width: 40.5em) {
+@media (min-width: 50em) {
   .timer-main-part {
-    font-size: 3rem;
-  }
-  .millisecond {
-    font-size: 1rem;
-  }
-  .buttons {
-    display: flex;
-    justify-content: center;
-  }
-  .function-button {
-    width: 20%;
-    margin-inline: 1rem;
-  }
-  .milliseconds {
-    font-size: 1rem;
-  }
-  .lap-list {
-    font-size: 2rem;
-  }
-  .none {
-    display: inline-block;
-    visibility: hidden;
+    font-size: 5rem;
   }
   .laps {
-    max-height: 50vh;
+    width: 100%;
+    gap: 0.5rem;
+    font-size: 2.5rem;
   }
-}
-
-@media (max-width: 22.5em) {
-  .title {
-    font-size: 3rem;
-  }
-  .timer-main-part {
-    font-size: 2rem;
-  }
-  .millisecond {
-    font-size: 1rem;
+  .lapMilliSecond {
+    font-size: 1.5rem;
   }
 
   .function-button {
-    width: 20%;
-    margin-inline: 0.5rem;
+    width: 6rem;
+    margin-inline: 2rem;
+    aspect-ratio: 1;
+    background-color: black;
   }
-  .milliseconds {
+}
+
+@media (max-width: 23.5em) {
+  body {
+    background-color: red;
+  }
+  .heading {
     font-size: 1rem;
   }
-  .lap-list {
-    font-size: 1.5rem;
+  .laps {
+    font-size: 1rem;
+  }
+  .lapMilliSecond {
+    font-size: 0.8rem;
   }
 }

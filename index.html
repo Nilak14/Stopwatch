@@ -14,33 +14,47 @@
 <body>
     <article class="container">
         <h1 class="title">StopWatch</h1>
-        <main>
-            <section class="timer-main-part">
-                <span class="hours">00 :</span>
-                <span class="mins">00 :</span>
-                <span class="secs">00</span>
-                <span class="millisecond">00</span>
-            </section>
 
-            <section class="buttons">
-                <button class="start function-button">
-                    <img src="images/start.png" alt="Start" class="start-image function-image" title="Start">
-                </button>
-
-                <button class="lap-button function-button none">
-                    <img src="images/lap.png" alt="Start" class="lap-image function-image" title="Start">
-                </button>
-
-                <button class="reset-timer function-button">
-                    <img src="images/reset.png" alt="Reset" class="reset-image function-image" title="reset">
-                </button>
-
-
-            </section>
-        </main>
+        <section class="timer-main-part effect">
+            <span class="hours">00 :</span>
+            <span class="mins">00 :</span>
+            <span class="secs">00</span>
+            <span class="millisecond">00</span>
+        </section>
 
         <section class="laps">
-            <div class="laps-list-container"></div>
+            <div class="lap-number lap-div">
+                <p class="heading h-num"></p>
+                <div class="num"></div>
+            </div>
+
+            <div class="laps-time lap-div">
+                <p class="heading h-lap"></p>
+                <div class="lap"></div>
+            </div>
+
+            <div class="laps-overallTime lap-div">
+                <p class="heading h-overall"></p>
+                <div class="overall"></div>
+
+            </div>
+
+        </section>
+
+        <section class="buttons">
+            <button class="start function-button">
+                <img src="images/start.png" alt="Start" class="start-image function-image" title="Start">
+            </button>
+
+            <button class="lap-button function-button none">
+                <img src="images/lap.png" alt="Start" class="lap-image function-image" ti tle="Start">
+            </button>
+
+            <button class="reset-timer function-button">
+                <img src="images/reset.png" alt="Reset" class="reset-image function-image" title="reset">
+            </button>
+
+
         </section>
     </article>
     <script src="Scripts/index.js"></script>
